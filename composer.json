@@ -1,11 +1,11 @@
 {
-    "name": "schubu/make-view",
+    "name": "schubu/laravel-make-view",
     "description": "A laravel artisan cli plugin to create your views",
     "keywords": [
         "schubu",
-        "make-view"
+        "laravel-make-view"
     ],
-    "homepage": "https://github.com/schubu/make-view",
+    "homepage": "https://github.com/schubu/laravel-make-view",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -16,12 +16,11 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "illuminate/support": "^6.0"
+        "php": "^7.2.5"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {

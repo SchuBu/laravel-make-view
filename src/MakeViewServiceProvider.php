@@ -3,6 +3,8 @@
 namespace SchuBu\MakeView;
 
 use Illuminate\Support\ServiceProvider;
+use SchuBu\MakeView\Console\MakeViewCommand;
+use SchuBu\MakeView\Console\MakeModelCommand;
 
 class MakeViewServiceProvider extends ServiceProvider
 {
@@ -21,8 +23,21 @@ class MakeViewServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('make-view.php'),
+                __DIR__ . '/../config/config.php' => config_path('make-view.php'),
             ], 'config');
+
+            if ($this->app->runningInConsole()) {
+                // publish config file
+
+                $this->commands([
+                    MakeViewCommand::class,
+//                    MakeModelCommand::class,
+                ]);
+            }
+
+            $this->publishes([
+                __DIR__ . '/Console/stubs' =>  app_path('Vendor'. DIRECTORY_SEPARATOR .'SchuBu'. DIRECTORY_SEPARATOR .'make-view' . DIRECTORY_SEPARATOR . 'stubs'),
+            ], 'stubs');
 
             // Publishing the views.
             /*$this->publishes([
@@ -39,8 +54,6 @@ class MakeViewServiceProvider extends ServiceProvider
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/make-view'),
             ], 'lang');*/
 
-            // Registering package commands.
-            // $this->commands([]);
         }
     }
 
@@ -50,7 +63,7 @@ class MakeViewServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'make-view');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'make-view');
 
         // Register the main class to use with the facade
         $this->app->singleton('make-view', function () {
